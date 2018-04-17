@@ -24,11 +24,14 @@ Requirement: Sort a linked list in O(n log n) time using constant space complexi
 Solution: 
 1. Find the middle of list and to separate the list into two parts (Recursion).
 2. Compare the two part of lists and merge them together, while use recursion, these two parts of lists should have been sorted.
+
 解题思路：
 1. 找到链表的中间位置，将其拆分为前后两部分。（递归）
 2. 通过对比两部分的链表，将其按值的大小合并为一个链表。且在递归情况下，前后两个链表为已经排序的链表。
+
 These two steps are implemented by two functions 这两个步骤分别通过两个函数实现
 The first is sortList(ListNode* head), which is used to seperate the list in 'two' parts，acutually it's every node
+
 首先是第一个函数：sortList(ListNode* head)
 其目的是为list划分为前后"两"部分l1,l2,以递归的形式划分到每一个node
 ```
@@ -50,6 +53,7 @@ public:
     }
 ```
 The second function is MergeList(ListNode* l1, ListNode* l2), in order to merge two input lists according to the val.
+
 第二个函数为MergeList(ListNode* l1, ListNode* l2)
 其目的是为了将传入的两个list按数值大小顺序合并
 ```
@@ -75,3 +79,6 @@ The second function is MergeList(ListNode* l1, ListNode* l2), in order to merge 
         return pcur->next;
     }
 ```
+Things to be learned 学到知识点：
+1. Use fast (jump by 2) and slow (jump by 1) two pointers to find the middle of list.
+2. Use recursion to merge nodes from only two to the whole half part of the list.
