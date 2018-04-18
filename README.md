@@ -82,3 +82,59 @@ The second function is MergeList(ListNode* l1, ListNode* l2), in order to merge 
 Things to be learned 学到知识点：
 1. Use fast (jump by 2) and slow (jump by 1) two pointers to find the middle of list.
 2. Use recursion to merge nodes from only two to the whole half part of the list.
+
+
+【100.Same Tree】
+```
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+    }
+};
+```
+Although this is an easy problem, there are many matters needing attention.
+It's about the "stop point": when to stop the recursion would be accurate and effciency too?
+My habit of writting recursion is to write the body of recursion first, then add in judgement conditions.
+For this problem, Tree, so the recursion is like below:
+```
+bool Left=true;
+bool Right=true;
+if(p->left || q->left) Left = Left = isSameTree(p->left,q->left);
+if(p->right || q->right) Right = isSameTree(p->right,q->right);
+return(Left && Right);
+```
+Now, consider the conditions below:
+1. p's val differs from q's val;
+2. p and q may both be nullptr;
+3. one of p and q is nullptr;
+```
+if(p==nullptr && q==nullptr) return true;
+if(!((p==nullptr && q==nullptr)||(p!=nullptr && q!=nullptr))) return false;
+if(p->val != q->val) return false;
+```
+So the final solution is:
+```
+ bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p==nullptr && q==nullptr) return true;
+        if(!((p==nullptr && q==nullptr)||(p!=nullptr && q!=nullptr))) return false;
+        if(p->val != q->val) return false;
+        bool Left = true;
+        bool Right = true;
+        if(p->left || q->left){  // incase that p only has left and q only has right
+            Left = isSameTree(p->left,q->left);
+        }
+        if(p->right || q->right) {
+            Right = isSameTree(p->right,q->right);
+        }
+        return(Left && Right);
+    }
+```
