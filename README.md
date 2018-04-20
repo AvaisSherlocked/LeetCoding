@@ -161,3 +161,35 @@ public:
 };
 ```
 The bit operation '>> x ' means moving right x bits (x is constant).
+
+【215. Kth Largest Element in an Array】
+```
+    int findKthLargest(vector<int>& nums, int k) {
+        return QuickSort(nums,0,nums.size()-1,nums.size()-k);  // the quicksort is min first, so it's nums.size()-k
+    }
+    
+    int QuickSort(vector<int>& nums, int left, int right, int k){
+        int val = nums[left];  //i:begin, j:end
+        if(left == right) return val;
+        int i = left;
+        int j = right;
+        while(i<j){
+            // it's very very important to let j go first. And also don't forget the '&& i<j'
+            while(nums[j]>=val && i<j) j--;
+            while(nums[i]<=val && i<j) i++;
+            if(i>=j) break;
+            int tmp = nums[i]; nums[i] = nums[j]; nums[j] = tmp;
+        }
+        nums[left] = nums[j];
+        nums [j] = val;
+        if(k == i) return nums[i];
+        else if(k < i) return QuickSort(nums,left,i-1,k); // i-1
+        else return QuickSort(nums,i+1,right,k); //i+1
+    }
+```
+Use quick sort or min heap sort would be efficiency.
+Here are some conclusions for things needing attention:
+1. Don't forget the juding conditions: "while(i<j)" and also "nums[j]>=val && i<j"
+the && i<j is easy to be forgotten.
+2. Don't forget to run the while loop for j first(if you choose the left first num as the base num). Because the right part is less than left part, so if i goes first, it may stop at a num smaller than the base number, and swap. e.g. [2,3,3,3,1,1,1]
+3. The recursion part, the two index should be [left,i-1] and [i+1,right].
