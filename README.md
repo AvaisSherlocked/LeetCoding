@@ -297,6 +297,7 @@ for(int i=0;i<n;i++){ // the first loop in row
 Implement int sqrt(int x).
 Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
 Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+
 e.g.
 ```
 Input: 4
@@ -349,6 +350,7 @@ public:
     }
 };
 ```
+This `r = (r + a / r) / 2` can work out is because it shrink according to the r you use. Suppose r^2 > a, then r > a/r must be true. Use the middle value of r and a/r would approach the right value step by step.
 【70.climbing stairs】
 
 questions:
