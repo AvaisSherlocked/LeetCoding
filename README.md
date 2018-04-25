@@ -349,3 +349,51 @@ public:
     }
 };
 ```
+【70.climbing stairs】
+
+questions:
+```
+You are climbing a stair case. It takes n steps to reach to the top.
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+Input: 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+```
+At first I plan to see the rules between n stairs and n-1 stairs. However, when I list out the first 5 items of 1,2,3,4,5 stairs, I found the total sum of distinct ways are of Fibonacci sequence. So just calculate the n-th Fibonacci value can get the problem solved.
+There are two ways to solve this:
+`Accumulation`
+```
+class Solution {
+public:
+    int climbStairs(int n) {
+        long sum =0;
+        if(n==1) return 1;
+        if(n==2) return 2;
+        long f=1;
+        long s=2;
+        for(int i=3;i<=n;i++){
+            sum =f+s;
+            f = s;
+            s = sum;
+        }
+        return sum;
+    }
+};
+```
+`formular`
+```
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n==1) return 1;
+        if(n==2) return 2;
+        double sum = (pow((1+sqrt(5))/2,n+1)-pow((1-sqrt(5))/2,n+1))/sqrt(5);
+        return (int)sum;
+    }
+};
+```
+the second 'formular' way is faster than the first: O(1) vs O(n). 
