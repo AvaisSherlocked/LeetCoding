@@ -193,3 +193,99 @@ Here are some conclusions for things needing attention:
 the && i<j is easy to be forgotten.
 2. Don't forget to run the while loop for j first(if you choose the left first num as the base num). Because the right part is less than left part, so if i goes first, it may stop at a num smaller than the base number, and swap. e.g. [2,3,3,3,1,1,1]
 3. The recursion part, the two index should be [left,i-1] and [i+1,right].
+
+【70.N-QUEENS】
+Questions:
+```
+Given an integer n, return all distinct solutions to the n-queens puzzle.
+Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
+```
+Examples:
+```
+Input: 4
+Output: [
+ [".Q..",  // Solution 1
+  "...Q",
+  "Q...",
+  "..Q."],
+
+ ["..Q.",  // Solution 2
+  "Q...",
+  "...Q",
+  ".Q.."]
+]
+Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.
+```
+Solution:
+```
+class Solution {
+public:
+    
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> res;
+        vector<int> V(n,0);
+        int curRow = 0;
+        solve(res, V, curRow, n);
+        return res;
+    }
+    void solve(vector<vector<string>> &res, vector<int> &V, int curRow, int n){
+        for(int i=0;i<n;i++){ // the first loop in row
+            V[curRow] = i;
+            bool nocrash = true;
+            for(int j=0;j<curRow;j++){ //check with former positions
+                if(V[j] == i || abs(V[j]-V[curRow]) == abs(j-curRow))  //remember the positive, negative situation
+                { nocrash = false; break;}
+            }
+            
+            if(curRow == n-1 && nocrash){
+                vector<string> v (n,string(n,'.'));
+                for(int i=0;i<n;i++){
+                    v[i][V[i]]='Q';
+                }
+                res.push_back(v);
+            }
+            
+            else if(nocrash == true)
+                solve(res,V,curRow+1,n);
+        }
+    }
+};
+```
+The whole solution is doing following things:
+
+1. For every row in board, judge when set its one col as Q, if there are any crash existing before this row.
+2. To make it more clear and efficient, use vector<int>V, to store the j-th n-th col in row. e.g. V[Row] = j.
+3. After judging rows one by one, when row comes to n, one solution is reached and push back into vector<vector<string>> res.
+
+Explainations in detail:
+ in the main function, input the  parameters for void function "solve". curRow means current row, starts from 0.
+```
+ vector<vector<string>> solveNQueens(int n)
+```
+solve() function has three parts:
+1. check each row before current row if the position has crash, in order to find the right sequence.
+```
+for(int i=0;i<n;i++){ // the first loop in row
+            V[curRow] = i;
+            bool nocrash = true;
+            for(int j=0;j<curRow;j++){ //check with former positions
+                if(V[j] == i || abs(V[j]-V[curRow]) == abs(j-curRow))  //remember the positive, negative situation
+                { nocrash = false; break;}
+            }
+ ···
+ ```
+ 2. when curRow comes to end, one solution is found and is pushed back. Learn to use "vector<string> v(n,string(n,'.'))" this method of initialization.
+ ```
+ if(curRow == n-1 && nocrash){
+                vector<string> v (n,string(n,'.'));
+                for(int i=0;i<n;i++){
+                    v[i][V[i]]='Q';
+                }
+                res.push_back(v);
+            }
+```
+3. To judge next row.
+```
+ else if(nocrash == true)
+       solve(res,V,curRow+1,n);
+```
