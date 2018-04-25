@@ -194,7 +194,8 @@ the && i<j is easy to be forgotten.
 2. Don't forget to run the while loop for j first(if you choose the left first num as the base num). Because the right part is less than left part, so if i goes first, it may stop at a num smaller than the base number, and swap. e.g. [2,3,3,3,1,1,1]
 3. The recursion part, the two index should be [left,i-1] and [i+1,right].
 
-【70.N-QUEENS】
+【51.N-QUEENS】
+
 Questions:
 ```
 Given an integer n, return all distinct solutions to the n-queens puzzle.
@@ -288,4 +289,63 @@ for(int i=0;i<n;i++){ // the first loop in row
 ```
  else if(nocrash == true)
        solve(res,V,curRow+1,n);
+```
+
+【69.sqrt(x)】
+
+`questions:`
+Implement int sqrt(int x).
+Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+e.g.
+```
+Input: 4
+Output: 2
+Input: 8
+Output: 2
+```
+My solution:
+```
+class Solution {
+public:
+    int mySqrt(int x) {
+        long s=x/10;
+        while(s*s > x)
+            s = s/10;
+        if(s*s == x) return s;
+        else{
+            long l=s;
+            long r=s*10;
+            if(r==0) r=10;
+            s=(s+r)/2;
+            while(!(s*s<=x && (s+1)*(s+1)>=x)){
+                if(s*s < x){
+                    l = s;
+                    s = (l+r)/2;
+                }
+                else if(s*s > x){
+                    r = s;
+                    s = (l+r)/2;
+                }
+            }
+            if((s+1)*(s+1)==x) return s+1;
+            return s;
+        }
+    }
+};
+```
+First use /10 then use middle value to approaching the target value.
+However, it's slower and looks more complicated than following codes:
+```
+class Solution {
+public:
+    int mySqrt(int x) {
+        long r = x;
+        long a = x;
+        while(r * r > a) {
+            r = (r + a / r) / 2;
+        }
+        return r;
+    }
+};
 ```
