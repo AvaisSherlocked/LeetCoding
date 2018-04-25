@@ -396,4 +396,4 @@ public:
     }
 };
 ```
-the second 'formular' way is faster than the first: O(1) vs O(n). 
+the second 'formular' way is faster than the first way: O(1) vs O(n). 
