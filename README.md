@@ -2,7 +2,7 @@
 My solutions for leetcode with explanations
 
 【148.Sort List】
-```
+``` c++
 /**
  * Definition for singly-linked list.
  * struct ListNode {
