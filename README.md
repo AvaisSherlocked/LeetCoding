@@ -34,7 +34,7 @@ The first is sortList(ListNode* head), which is used to seperate the list in 'tw
 
 首先是第一个函数：sortList(ListNode* head)
 其目的是为list划分为前后"两"部分l1,l2,以递归的形式划分到每一个node
-```
+```C++
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
@@ -56,7 +56,7 @@ The second function is MergeList(ListNode* l1, ListNode* l2), in order to merge 
 
 第二个函数为MergeList(ListNode* l1, ListNode* l2)
 其目的是为了将传入的两个list按数值大小顺序合并
-```
+```C++
 // part 2: merge the input 2 lists
     ListNode* MergeList(ListNode* l1,ListNode* l2){
         ListNode* cur = new ListNode(0);
@@ -85,7 +85,7 @@ Things to be learned 学到知识点：
 
 
 【100.Same Tree】
-```
+```C++
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -141,7 +141,7 @@ So the final solution is:
 
 【35.Search In Insertion Position】
 For sorted array, the dichotomy should be considered firstly.
-```
+```C++
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
@@ -163,7 +163,7 @@ public:
 The bit operation '>> x ' means moving right x bits (x is constant).
 
 【215. Kth Largest Element in an Array】
-```
+```C++
     int findKthLargest(vector<int>& nums, int k) {
         return QuickSort(nums,0,nums.size()-1,nums.size()-k);  // the quicksort is min first, so it's nums.size()-k
     }
@@ -218,7 +218,7 @@ Output: [
 Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.
 ```
 Solution:
-```
+```C++
 class Solution {
 public:
     
@@ -265,7 +265,7 @@ Explainations in detail:
 ```
 solve() function has three parts:
 1. check each row before current row if the position has crash, in order to find the right sequence.
-```
+```C++
 for(int i=0;i<n;i++){ // the first loop in row
             V[curRow] = i;
             bool nocrash = true;
@@ -274,9 +274,10 @@ for(int i=0;i<n;i++){ // the first loop in row
                 { nocrash = false; break;}
             }
  ···
- ```
+```
+
  2. when curRow comes to end, one solution is found and is pushed back. Learn to use "vector<string> v(n,string(n,'.'))" this method of initialization.
- ```
+```C++
  if(curRow == n-1 && nocrash){
                 vector<string> v (n,string(n,'.'));
                 for(int i=0;i<n;i++){
@@ -306,7 +307,7 @@ Input: 8
 Output: 2
 ```
 My solution:
-```
+```C++
 class Solution {
 public:
     int mySqrt(int x) {
@@ -337,7 +338,7 @@ public:
 ```
 First use /10 then use middle value to approaching the target value.
 However, it's slower and looks more complicated than following codes:
-```
+```C++
 class Solution {
 public:
     int mySqrt(int x) {
@@ -354,7 +355,7 @@ This `r = (r + a / r) / 2` can work out is because it shrink according to the r 
 【70.climbing stairs】
 
 questions:
-```
+```C++
 You are climbing a stair case. It takes n steps to reach to the top.
 Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
@@ -368,7 +369,7 @@ Explanation: There are three ways to climb to the top.
 At first I plan to see the rules between n stairs and n-1 stairs. However, when I list out the first 5 items of 1,2,3,4,5 stairs, I found the total sum of distinct ways are of Fibonacci sequence. So just calculate the n-th Fibonacci value can get the problem solved.
 There are two ways to solve this:
 `Accumulation`
-```
+```C++
 class Solution {
 public:
     int climbStairs(int n) {
@@ -387,7 +388,7 @@ public:
 };
 ```
 `formular`
-```
+```C++
 class Solution {
 public:
     int climbStairs(int n) {
