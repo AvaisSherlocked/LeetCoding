@@ -105,7 +105,7 @@ Although this is an easy problem, there are many matters needing attention.
 It's about the "stop point": when to stop the recursion would be accurate and effciency too?
 My habit of writting recursion is to write the body of recursion first, then add in judgement conditions.
 For this problem, Tree, so the recursion is like below:
-```
+```C++
 bool Left=true;
 bool Right=true;
 if(p->left || q->left) Left = Left = isSameTree(p->left,q->left);
@@ -116,13 +116,13 @@ Now, consider the conditions below:
 1. p's val differs from q's val;
 2. p and q may both be nullptr;
 3. one of p and q is nullptr;
-```
+```C++
 if(p==nullptr && q==nullptr) return true;
 if(!((p==nullptr && q==nullptr)||(p!=nullptr && q!=nullptr))) return false;
 if(p->val != q->val) return false;
 ```
 So the final solution is:
-```
+```C++
  bool isSameTree(TreeNode* p, TreeNode* q) {
         if(p==nullptr && q==nullptr) return true;
         if(!((p==nullptr && q==nullptr)||(p!=nullptr && q!=nullptr))) return false;
