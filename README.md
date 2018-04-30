@@ -418,5 +418,57 @@ Output:
 This problem can be solved by both iteratively and backtracking.
 
 `Iteratively:`
-`Choose the val one by one.
+`Choose the element one by one. Insert it to each available position.`
+```C++
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        int s=nums.size();
+        vector<vector<int>> res;
+        if(s==0) return res;
+        res.push_back(vector<int>(1,nums[0]));
+        for(int i=1;i<s;i++){
+            Insertion(res,nums[i]);
+        }
+        return res;
+    }
+    void Insertion(vector<vector<int>> &res,int m){
+        vector<vector<int>> res2;
+        for(int i=0;i<res.size();i++){
+            vector<int> item = res[i];
+            item.push_back(m); // add in one more element
+            res2.push_back(item);
+            for(int j=item.size()-1;j>0;j--){ // the insert position is moving forward one by one 
+                item[j] = item[j-1];
+                item[j-1]=m;
+                res2.push_back(item);
+            }
+        }
+        res = res2;
+    }
+};
+```
+Time Complexity: O(n^2)
+Space Complexity: O(n^2)
+
+`recursively`
+```C++
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> res;
+        helper(res,nums,0);
+        return res;
+    }
+    void helper(vector<vector<int>> &res, vector<int> &nums, int pos){
+        if(pos==nums.size()) {res.push_back(nums);return;}
+        for(int i=pos;i<nums.size();i++){
+            swap(nums[pos],nums[i]);
+            helper(res,nums,pos+1);  // pos+1, very important!
+            swap(nums[pos],nums[i]);
+        }
+    }
+};
+```
+Solution：swap one elements till the end.
 
