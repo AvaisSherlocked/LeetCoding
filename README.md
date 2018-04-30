@@ -416,6 +416,7 @@ Output:
 ]
 ```
 This problem can be solved by both iteratively and backtracking.
+
 `Iteratively:`
-`
+`Choose the val one by one.
 
