@@ -471,4 +471,54 @@ public:
 };
 ```
 Solution：swap one elements till the end.
+However, if the permute contains duplicate elements, the iterative method is difficult to implement.
 
+【47.Permutations II】
+`question`
+```
+Input: [1,1,2]
+Output:
+[
+  [1,1,2],
+  [1,2,1],
+  [2,1,1]
+]
+```
+Solution: Choose one element from the permutation, and each time the choice should skip duplicate elements. 
+`e.g.`
+[1,1,2,2]
+`
+level1:       1 - [1,2,2],                      2 - [1,1,2]
+level2: 11-[2,2],     12-[1,2],          21-[1,2],      22-[1,1]
+level3: 112-[2],  121-[2],122-[1],   211-[2],212-[1],   221-[1]
+level4: 1122,        1212,1221,        2112, 2121,       2211
+`
+Codes:
+```C++
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> res;
+        
+        Allswap(res,nums,0);
+        return res;
+    }
+    
+    void Allswap(vector<vector<int>> &res,vector<int> nums,int i){
+        if(i==nums.size()-1){
+            res.push_back(nums);
+            return;
+        }
+        for(int j=i;j<nums.size();j++){
+            if(i!=j && nums[i]==nums[j]) continue;   // skip the duplicate
+            swap(nums[i],nums[j]);
+            Allswap(res,nums,i+1);
+            
+        }
+    }
+};
+```
+Attention: 
+1. sort first
+2. skip the duplicates before swap
