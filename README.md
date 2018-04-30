@@ -474,6 +474,7 @@ Solution：swap one elements till the end.
 However, if the permute contains duplicate elements, the iterative method is difficult to implement.
 
 【47.Permutations II】
+====
 `question`
 ```
 Input: [1,1,2]
@@ -488,10 +489,10 @@ Solution: Choose one element from the permutation, and each time the choice shou
 `e.g.`
 [1,1,2,2]
 `
-level1:       1 - [1,2,2],                      2 - [1,1,2]
-level2: 11-[2,2],     12-[1,2],          21-[1,2],      22-[1,1]
-level3: 112-[2],  121-[2],122-[1],   211-[2],212-[1],   221-[1]
-level4: 1122,        1212,1221,        2112, 2121,       2211
+level1:       1 - [1,2,2],                      2 - [1,1,2]\<br>
+level2: 11-[2,2],     12-[1,2],          21-[1,2],      22-[1,1]\<br>
+level3: 112-[2],  121-[2],122-[1],   211-[2],212-[1],   221-[1]\<br>
+level4: 1122,        1212,1221,        2112, 2121,       2211\<br>
 `
 Codes:
 ```C++
