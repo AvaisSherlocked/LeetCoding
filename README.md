@@ -400,3 +400,22 @@ public:
 };
 ```
 the second 'formular' way is faster than the first way: O(1) vs O(n). 
+
+【46. Permutations】--Conclusion according to backtracking
+`question`
+```
+Input: [1,2,3]
+Output:
+[
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
+]
+```
+This problem can be solved by both iteratively and backtracking.
+`Iteratively:`
+`
+
