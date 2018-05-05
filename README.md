@@ -527,8 +527,38 @@ public:
 Attention: 
 1. sort first
 2. skip the duplicates before swap
-
+【190.Reverse bits】
+==
+`Reverse bits of a given 32 bits unsigned integer`
+```
+e.g.
+Input: 43261596
+Output: 964176192
+Explanation: 43261596 represented in binary as 00000010100101000001111010011100, 
+             return 964176192 represented in binary as 00111001011110000010100101000000.
+```
+`solution`
+Problem of bit operation, things need to be known previously:
+1. 32 bits unsigned integer can use 16 bits system to represent.
+2. in C++ there is no way to define 2 bits system integer but can represent 8-bits, 10-bits and 16-bits.
+3. know the meaning of '>>' and '<<' and '|' operation signs.
+This problem is solved by binary swapping.
+```C++
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        n = (n >> 16) | (n << 16);
+        n = ((n & 0xff00ff00) >> 8) | ((n & 0x00ff00ff) << 8);
+        n = ((n & 0xf0f0f0f0) >> 4) | ((n & 0x0f0f0f0f) << 4);
+        n = ((n & 0xcccccccc) >> 2) | ((n & 0x33333333) << 2);
+        n = ((n & 0xaaaaaaaa) >> 1) | ((n & 0x55555555) << 1);
+        return n;
+    }
+};
+```
+The first line swap the former 16-bits and latter 16-bits. And each line of the next go on swapping the former half and latter half of the smaller period.(result of the upper line).
 【198.House Robbing】
+==
 ```
 You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint
 stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police 
@@ -556,7 +586,7 @@ This is a DP problem and the constrains are:
 2. Maximize the sum
 We can't consider it from backward since each choice of now would affect the choice afterwards. So we consider it as how to choose the former sum to get the best choice. 
 Considering that to maximize the sum, it's definitely right to add as more legal elements as possible. So in the e.g.`a b c d` we get three situations, when choose 'a' we have 'c','d' left to be chosen and if we choose 'b', we can only choose'c'. With the purpose that the current choice should be the best, we use the form of `n = max(x,y)`to achieve this. In addition, the choice can be divided by the odd and even number to implement the traverse.
-```
+```C++
 class Solution {
 public:
     int rob(vector<int>& nums) {
@@ -572,4 +602,5 @@ public:
 };
 ```
 `time complexity: O(n)`
+
 `space complexity: O(n)`
