@@ -527,8 +527,9 @@ public:
 Attention: 
 1. sort first
 2. skip the duplicates before swap
+
 【190.Reverse bits】
-==
+=
 `Reverse bits of a given 32 bits unsigned integer`
 ```
 e.g.
@@ -557,8 +558,9 @@ public:
 };
 ```
 The first line swap the former 16-bits and latter 16-bits. And each line of the next go on swapping the former half and latter half of the smaller period.(result of the upper line).
+
 【198.House Robbing】
-==
+=
 ```
 You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint
 stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police 
