@@ -527,3 +527,49 @@ public:
 Attention: 
 1. sort first
 2. skip the duplicates before swap
+
+【198.House Robbing】
+```
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint
+stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police 
+if two adjacent houses were broken into on the same night.
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob 
+tonight without alerting the police.
+```
+```
+e.g.1
+Input: [1,2,3,1]
+Output: 4
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+             Total amount you can rob = 1 + 3 = 4.
+```
+```
+e.g.2
+Input: [2,7,9,3,1]
+Output: 12
+Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+             Total amount you can rob = 2 + 9 + 1 = 12.
+```
+`Solution`
+This is a DP problem and the constrains are:
+1. the adjacent elements can't be added together
+2. Maximize the sum
+We can't consider it from backward since each choice of now would affect the choice afterwards. So we consider it as how to choose the former sum to get the best choice. 
+Considering that to maximize the sum, it's definitely right to add as more legal elements as possible. So in the e.g.`a b c d` we get three situations, when choose 'a' we have 'c','d' left to be chosen and if we choose 'b', we can only choose'c'. With the purpose that the current choice should be the best, we use the form of `n = max(x,y)`to achieve this. In addition, the choice can be divided by the odd and even number to implement the traverse.
+```
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int no=0,ne=0;
+        for(int i=0;i<nums.size();i++){
+            if(i%2 == 0)
+                no = max(no+nums[i],ne);
+            else
+                ne = max(ne+nums[i],no);
+        }
+        return max(no,ne);
+    }
+};
+```
+`time complexity: O(n)`
+`space complexity: O(n)`
