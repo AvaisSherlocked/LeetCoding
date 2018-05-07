@@ -119,7 +119,7 @@ For this problem, Tree, so the recursion is like below:
 ```C++
 bool Left=true;
 bool Right=true;
-if(p->left || q->left) Left = Left = isSameTree(p->left,q->left);
+if(p->left || q->left) Left = isSameTree(p->left,q->left);
 if(p->right || q->right) Right = isSameTree(p->right,q->right);
 return(Left && Right);
 ```
@@ -136,7 +136,7 @@ So the final solution is:
 ```C++
  bool isSameTree(TreeNode* p, TreeNode* q) {
         if(p==nullptr && q==nullptr) return true;
-        if(!((p==nullptr && q==nullptr)||(p!=nullptr && q!=nullptr))) return false;
+        if(p==nullptr || q==nullptr) return false;
         if(p->val != q->val) return false;
         bool Left = true;
         bool Right = true;
@@ -151,6 +151,7 @@ So the final solution is:
 ```
 
 【35.Search In Insertion Position】
+=
 For sorted array, the dichotomy should be considered firstly.
 ```C++
 class Solution {
@@ -174,6 +175,7 @@ public:
 The bit operation '>> x ' means moving right x bits (x is constant).
 
 【215. Kth Largest Element in an Array】
+=
 ```C++
     int findKthLargest(vector<int>& nums, int k) {
         return QuickSort(nums,0,nums.size()-1,nums.size()-k);  // the quicksort is min first, so it's nums.size()-k
@@ -206,6 +208,7 @@ the && i<j is easy to be forgotten.
 3. The recursion part, the two index should be [left,i-1] and [i+1,right].
 
 【51.N-QUEENS】
+=
 
 Questions:
 ```
@@ -304,6 +307,7 @@ for(int i=0;i<n;i++){ // the first loop in row
 ```
 
 【69.sqrt(x)】
+=
 
 `questions:`
 Implement int sqrt(int x).
@@ -363,8 +367,9 @@ public:
 };
 ```
 This `r = (r + a / r) / 2` can work out is because it shrink according to the r you use. Suppose r^2 > a, then r > a/r must be true. Use the middle value of r and a/r would approach the right value step by step.
-【70.climbing stairs】
 
+【70.climbing stairs】
+=
 questions:
 ```C++
 You are climbing a stair case. It takes n steps to reach to the top.
@@ -413,6 +418,7 @@ public:
 the second 'formular' way is faster than the first way: O(1) vs O(n). 
 
 【46. Permutations】--Conclusion according to backtracking
+=
 `question`
 ```
 Input: [1,2,3]
